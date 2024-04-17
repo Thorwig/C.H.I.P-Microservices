@@ -1,0 +1,48 @@
+version: '3'
+services:
+
+  assistant-service:
+    build: 
+      context: ./assistantService
+    networks:
+      - private-network
+    container_name: assistant-service
+    env_file:
+      - env_variables/assistant.env
+
+  stt-service:
+    build: 
+      context: ./sttService
+    networks:
+      - private-network
+    container_name: stt-service
+    env_file:
+      - env_variables/stt.env
+
+  tts-service:
+    build: 
+      context: ./ttsService
+    networks:
+      - private-network
+    container_name: tts-service
+    env_file:
+      - env_variables/tts.env
+
+  vision-service:
+    build: 
+      context: ./visionService
+    networks:
+      - private-network
+    container_name: vision-service
+    env_file:
+      - env_variables/vision.env
+
+networks:
+  private-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1
+          ip_range: 172.20.0.0/24
