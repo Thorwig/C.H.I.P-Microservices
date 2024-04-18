@@ -36,6 +36,16 @@ services:
     container_name: vision-service
     env_file:
       - env_variables/vision.env
+      
+  nginx-rp:
+      build:
+        context: ./reverseProxy/
+      ports:
+        - 80:80
+      networks:
+        - private-network
+      container_name: nginx-rp
+
 
 networks:
   private-network:
