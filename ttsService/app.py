@@ -13,4 +13,4 @@ def tts():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(port=2004)
+    app.run(host='0.0.0.0', port=2004)
