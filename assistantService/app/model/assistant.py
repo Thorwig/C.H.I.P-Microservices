@@ -1,4 +1,6 @@
 from openai import OpenAI
+import sys
+
 client = OpenAI()
 
 
@@ -10,4 +12,4 @@ def ask_assistant(message):
             {"role": "user", "content": message}
         ]
     )
-    return response
+    return response.choices[0].message.content
