@@ -13,4 +13,4 @@ def hello():
 def assistant():
     message = request.json['message']
     response = ask_assistant(message)
-    return response.choices[0].message.content
+    return response
