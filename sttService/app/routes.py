@@ -10,22 +10,10 @@ api_bp = Blueprint('api_bp', __name__)
 def index():
     return "HELLO WORLD, sttService"
 
-@api_bp.route('/stt', methods=['POST'])
-def stt():
-    message = request.json['message']
-    response = transcribe_audio(message)
-    return jsonify({"audio_url": f"/audio/{response.id}"})
-
-
-@socketio.on('message')
-def handle_message(message):
-    app.logger.info('Received message')
-    # Process audio data here
-    transcription = transcribe_audio(message)
-    emit('transcription', {'text': transcription})
-
 
 @socketio.on('transcribe', namespace='/stt')
 def transcribe(message):
+    print('Transcribe event received')
     response = transcribe_audio(message['audio'])
     emit('transcribe', {"audio_url": f"/audio/{response.id}"})
+    print('Transcribe event sent')

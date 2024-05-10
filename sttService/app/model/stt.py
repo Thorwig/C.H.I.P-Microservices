@@ -8,4 +8,5 @@ def transcribe_audio(audio_file):
         file=audio_file,
         response_format="text"
     )
+    print(transcription)
     return transcription
